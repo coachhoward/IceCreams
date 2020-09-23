@@ -160,3 +160,13 @@ Processing by PintsController#index as HTML
 Completed 200 OK in 22ms (Views: 11.3ms | ActiveRecord: 7.4ms | Allocations: 8451)
 
 
+Started GET "/ice_creams/1" for ::1 at 2020-09-22 21:56:59 -0400
+Processing by IceCreamsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mIceCream Load (0.5ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/ice_creams_controller.rb:45:in `set_ice_cream'
+  [1m[36mPint Load (0.3ms)[0m  [1m[34mSELECT "pints".* FROM "pints" WHERE "pints"."ice_cream_id" = $1[0m  [["ice_cream_id", 1]]
+  ↳ app/controllers/ice_creams_controller.rb:14:in `show'
+Completed 200 OK in 21ms (Views: 5.2ms | ActiveRecord: 5.3ms | Allocations: 9044)
+
+
