@@ -31,3 +31,132 @@ Migrating to AddIceCreamIdToPints (20200923010248)
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3327774105905412240)[0m
   [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-09-22 21:19:27 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/chrishoward/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-6.0.3.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/chrishoward/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-6.0.3.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 8.3ms | Allocations: 409)
+Completed 200 OK in 20ms (Views: 14.8ms | ActiveRecord: 0.0ms | Allocations: 2255)
+
+
+Started GET "/ice_creams" for ::1 at 2020-09-22 21:44:48 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by IceCreamsController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 201)
+
+
+  
+SyntaxError (/Users/chrishoward/dev_ga_software_engineering/IceCreams/icecreams_api/app/models/ice_cream.rb:2: syntax error, unexpected ':', expecting `end'
+    has_many: pints
+            ^
+):
+  
+app/models/ice_cream.rb:2: syntax error, unexpected ':', expecting `end'
+app/models/ice_cream.rb:2: syntax error, unexpected ':', expecting `end'
+app/controllers/ice_creams_controller.rb:6:in `index'
+Started GET "/ice_creams" for ::1 at 2020-09-22 21:48:04 -0400
+Processing by IceCreamsController#index as HTML
+  [1m[36mIceCream Load (1.5ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams"[0m
+  ↳ app/controllers/ice_creams_controller.rb:8:in `index'
+Completed 200 OK in 11ms (Views: 1.9ms | ActiveRecord: 3.7ms | Allocations: 2665)
+
+
+Started GET "/ice_creams/1/pints" for ::1 at 2020-09-22 21:48:37 -0400
+Processing by PintsController#index as HTML
+  Parameters: {"ice_cream_id"=>"1"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 135)
+
+
+  
+SyntaxError (/Users/chrishoward/dev_ga_software_engineering/IceCreams/icecreams_api/app/models/pint.rb:2: syntax error, unexpected ':', expecting `end'
+    belongs_to: ice_cream
+              ^
+):
+  
+app/models/pint.rb:2: syntax error, unexpected ':', expecting `end'
+app/models/pint.rb:2: syntax error, unexpected ':', expecting `end'
+app/controllers/pints_controller.rb:5:in `index'
+Started GET "/ice_creams/1/pints" for ::1 at 2020-09-22 21:49:16 -0400
+Processing by PintsController#index as HTML
+  Parameters: {"ice_cream_id"=>"1"}
+  [1m[36mPint Load (1.0ms)[0m  [1m[34mSELECT "pints".* FROM "pints" WHERE "pints"."ice_cream_id" = $1[0m  [["ice_cream_id", 1]]
+  ↳ app/controllers/pints_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 2.1ms | ActiveRecord: 3.0ms | Allocations: 2829)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mIceCream Create (1.5ms)[0m  [1m[32mINSERT INTO "ice_creams" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Banana Pudding"], ["description", "Banana pudding with vanilla wafers"], ["created_at", "2020-09-23 01:49:49.372056"], ["updated_at", "2020-09-23 01:49:49.372056"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mIceCream Create (0.3ms)[0m  [1m[32mINSERT INTO "ice_creams" ("name", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Red Velvet"], ["description", "Delicious red velvet cake crumble mixed in"], ["created_at", "2020-09-23 01:49:49.378063"], ["updated_at", "2020-09-23 01:49:49.378063"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.4ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.8ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 1000], ["pints_made", 2000], ["profit_per_pint", "0.5"], ["month", "January"], ["created_at", "2020-09-23 01:49:49.417174"], ["updated_at", "2020-09-23 01:49:49.417174"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.3ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 220], ["pints_made", 200], ["profit_per_pint", "0.2"], ["month", "February"], ["created_at", "2020-09-23 01:49:49.423914"], ["updated_at", "2020-09-23 01:49:49.423914"], ["ice_cream_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 10], ["pints_made", 20], ["profit_per_pint", "0.1"], ["month", "March"], ["created_at", "2020-09-23 01:49:49.428628"], ["updated_at", "2020-09-23 01:49:49.428628"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.3ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.5ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 210], ["pints_made", 20], ["profit_per_pint", "0.1"], ["month", "April"], ["created_at", "2020-09-23 01:49:49.434045"], ["updated_at", "2020-09-23 01:49:49.434045"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 400], ["pints_made", 200], ["profit_per_pint", "0.2"], ["month", "May"], ["created_at", "2020-09-23 01:49:49.447908"], ["updated_at", "2020-09-23 01:49:49.447908"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.3ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 1000], ["pints_made", 100], ["profit_per_pint", "0.5"], ["month", "June"], ["created_at", "2020-09-23 01:49:49.453456"], ["updated_at", "2020-09-23 01:49:49.453456"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 5000], ["pints_made", 4000], ["profit_per_pint", "0.9"], ["month", "July"], ["created_at", "2020-09-23 01:49:49.458330"], ["updated_at", "2020-09-23 01:49:49.458330"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.1ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 9000], ["pints_made", 5000], ["profit_per_pint", "0.9"], ["month", "August"], ["created_at", "2020-09-23 01:49:49.463124"], ["updated_at", "2020-09-23 01:49:49.463124"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.4ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 1000], ["pints_made", 1000], ["profit_per_pint", "0.5"], ["month", "September"], ["created_at", "2020-09-23 01:49:49.468419"], ["updated_at", "2020-09-23 01:49:49.468419"], ["ice_cream_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 500], ["pints_made", 1000], ["profit_per_pint", "0.4"], ["month", "October"], ["created_at", "2020-09-23 01:49:49.473803"], ["updated_at", "2020-09-23 01:49:49.473803"], ["ice_cream_id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.3ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.4ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 400], ["pints_made", 200], ["profit_per_pint", "0.3"], ["month", "November"], ["created_at", "2020-09-23 01:49:49.480170"], ["updated_at", "2020-09-23 01:49:49.480170"], ["ice_cream_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.4ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 100], ["pints_made", 200], ["profit_per_pint", "0.1"], ["month", "December"], ["created_at", "2020-09-23 01:49:49.487201"], ["updated_at", "2020-09-23 01:49:49.487201"], ["ice_cream_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.1ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 10000], ["pints_made", 20000], ["profit_per_pint", "1.5"], ["month", "January"], ["created_at", "2020-09-23 01:49:49.492312"], ["updated_at", "2020-09-23 01:49:49.492312"], ["ice_cream_id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.1ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 9000], ["pints_made", 1000], ["profit_per_pint", "0.5"], ["month", "February"], ["created_at", "2020-09-23 01:49:49.497339"], ["updated_at", "2020-09-23 01:49:49.497339"], ["ice_cream_id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mIceCream Load (0.2ms)[0m  [1m[34mSELECT "ice_creams".* FROM "ice_creams" WHERE "ice_creams"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPint Create (0.3ms)[0m  [1m[32mINSERT INTO "pints" ("pints_sold", "pints_made", "profit_per_pint", "month", "created_at", "updated_at", "ice_cream_id") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["pints_sold", 8000], ["pints_made", 4000], ["profit_per_pint", "0.5"], ["month", "March"], ["created_at", "2020-09-23 01:49:49.502576"], ["updated_at", "2020-09-23 01:49:49.502576"], ["ice_cream_id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/ice_creams/1/pints" for ::1 at 2020-09-22 21:54:01 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PintsController#index as HTML
+  Parameters: {"ice_cream_id"=>"1"}
+  [1m[36mPint Load (0.6ms)[0m  [1m[34mSELECT "pints".* FROM "pints" WHERE "pints"."ice_cream_id" = $1[0m  [["ice_cream_id", 1]]
+  ↳ app/controllers/pints_controller.rb:8:in `index'
+Completed 200 OK in 22ms (Views: 11.3ms | ActiveRecord: 7.4ms | Allocations: 8451)
+
+

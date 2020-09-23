@@ -1,16 +1,17 @@
 class IceCreamsController < ApplicationController
-  before_action :set_ice_cream, only: [:show, :update, :destroy]
+  before_action :set_ice_cream, only: [:show]
 
   # GET /ice_creams
   def index
     @ice_creams = IceCream.all
 
-    render json: @ice_creams
+    render json: @ice_creams.to_json(include: :pints)
   end
 
   # GET /ice_creams/1
   def show
-    render json: @ice_cream
+    pints = @ice_cream.pints
+    render json: {ice_cream: @ice_cream, pints: pints}
   end
 
   # POST /ice_creams

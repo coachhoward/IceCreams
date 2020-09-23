@@ -1,3 +1,3 @@
 class IceCream < ApplicationRecord
-    has_many: pints
+    has_many :pints
 end
